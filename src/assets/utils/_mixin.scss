@@ -1,3 +1,28 @@
+@import '/src/assets/utils/variables';
+
+@mixin Flex($justify: flex-start, $align: flex-start, $direction: row, $wrap: wrap) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+
+}
+
+@mixin Title($font-size, $color) {
+    font-size: $font-size;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    color: $color;
+}
+
+@mixin Text($font-size, $font-weight, $color) {
+    font-family: "Roboto", sans-serif;
+    font-weight: $font-weight;
+    color: $color;
+    font-size: $font-size;
+}
+
 @mixin container-lg-modal() {
     position: fixed;
     width: 100vw;

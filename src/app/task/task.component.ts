@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { create } from 'domain';
 import { ITask } from '../models/task.model';
 
 @Component({
@@ -16,7 +15,18 @@ export class TaskComponent implements OnInit {
 
   task!: ITask;
 
-  tasksList!: ITask[];
+  tasksList: ITask[] = [
+    {
+      id: 1,
+      name: 'First task',
+      description: 'nik zebi'
+    },
+    {
+      id: 2,
+      name: 'seconde task',
+      description: 'nik zebi'
+    }
+  ];
   idCurrentClickedTask!: number | undefined;
 
   toggleAlert!: boolean;
@@ -42,7 +52,7 @@ export class TaskComponent implements OnInit {
   }
 
   onSubmit(createTask: boolean): void {
-
+    // make create task request
 
   }
 
@@ -65,12 +75,19 @@ export class TaskComponent implements OnInit {
       {
         name: task.name,
         description: task.description,
-
-        // photo: concession.photo
       }
     )
     this.task = task;
   }
 
+
+  responseAlert(event: any) {
+    if (event) {
+      // make delete task request 
+
+
+    }
+    this.toggleAlert = false;
+  }
 
 }

@@ -1,4 +1,23 @@
-@import "/src/assets/utils/mixins";
+@import "./../../assets/utils/layout";
+
+
+.button-add-task>.btn-primary {
+    /* cursor: pointer;
+    border: 0px;
+    border-radius: 2px;
+    color: #E2E9F3;
+    background-color: #595ff1; */
+    @include Flex($justify: space-around, $align: center, $wrap: nowrap);
+    margin-top: 2em;
+    margin-left: 3em;
+    gap: 1em;
+    padding: 10px;
+
+    svg {
+        width: 1.25em;
+        height: 1.25em;
+    }
+}
 
 .container-modal {
     @include container-lg-modal();
@@ -89,4 +108,196 @@
 
         }
     }
+}
+
+.isNotTable {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+        @include Text(1em, bold, $call-to-action);
+        outline-color: white;
+        border: white;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    tbody {
+        @media screen and (min-width: 361px) and (max-width: 700px) {
+            @include Flex($wrap: wrap, $justify: flex-start);
+            gap: 1em;
+            row-gap: 1em;
+            padding-bottom: 1em;
+        }
+
+        @media screen and (max-width: 361px) {
+            @include Flex($wrap: wrap, $justify: flex-start);
+            gap: 0.8em;
+            row-gap: 0.8em;
+            padding-bottom: 0.8em;
+        }
+    }
+
+    tbody>tr {
+        text-align: center;
+    }
+
+    tbody>tr>td {
+        text-align: center;
+        height: 75px;
+        @include Text(1em, 400, $text-color);
+
+        @media screen and (max-width: 700px) {
+            display: block;
+            width: auto;
+            height: auto;
+        }
+
+    }
+
+    .td_button {
+        @include Flex($direction: column, $align: center, $justify: center);
+        gap: 0.5em;
+        height: auto;
+        @include Text(1em, 400, $text-color);
+
+        @media screen and (max-width: 700px) {
+            display: block;
+            width: auto;
+            height: auto;
+        }
+
+        .btn-danger,
+        .btn-primary {
+            @include Flex($direction: column, $justify: center, $align: center);
+            width: 35%;
+            height: 0.5em;
+        }
+    }
+
+    @media screen and (min-width: 701px) {
+        .logo {
+            display: none;
+        }
+    }
+
+    tbody>tr:hover {
+        background-color: #a994f5;
+        cursor: pointer;
+    }
+
+    .line2,
+    .line4 {
+        background-color: #f5f5f5;
+    }
+
+    .ng-star-inserted:nth-child(odd) {
+        background-color: #f5f5f5;
+
+        @media screen and (max-width: 700px) {
+            background-color: white;
+        }
+    }
+
+    .isOpen {
+        .svg-asc {
+            display: none;
+        }
+    }
+
+    .isNotOpen {
+        .svg-desc {
+            display: none;
+        }
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width: 700px) {
+
+    thead {
+        display: none;
+    }
+
+    td::before {
+        content: attr(data-label);
+        top: 0;
+        left: 0;
+        height: 100%;
+        bottom: 0;
+        color: black;
+        @include Flex($align: center, $direction: column-reverse);
+    }
+
+    .ng-star-inserted {
+        background: linear-gradient(180deg, #ffe712 50%, white 50%);
+        background-color: white;
+        border-radius: 10px;
+        padding: 1em;
+
+        .logo {
+            border-radius: 10px 10px 0 0;
+        }
+
+        .name {
+            @include Text(1em, 700, black);
+        }
+
+        .concession {
+            @include Text(0.9em, 400, black);
+            padding-bottom: 1em;
+        }
+
+        .propositions {
+            @include Text(0.8em, 500, $call-to-action);
+        }
+    }
+}
+
+@media screen and (max-width: 384px) {
+
+
+    thead {
+        display: none;
+    }
+
+    td::before {
+        content: attr(data-label);
+        top: 0;
+        left: 0;
+        height: 100%;
+        bottom: 0;
+        color: black;
+        @include Flex($align: center, $direction: column-reverse);
+    }
+
+    .ng-star-inserted {
+        background: linear-gradient(180deg, #ffe712 50%, #ffffff 50%);
+        background-color: white;
+        border-radius: 10px;
+        padding: 0.5em;
+
+        .logo {
+            border-radius: 10px 10px 0 0;
+        }
+
+        .name {
+            @include Text(0.85em, 700, black);
+        }
+
+        .concession {
+            @include Text(0.75em, 400, black);
+            padding-bottom: 0.8em;
+        }
+
+        .propositions {
+            @include Text(0.65em, 500, $call-to-action);
+        }
+    }
+}
+
+.pagination {
+    width: 90%;
+    height: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }

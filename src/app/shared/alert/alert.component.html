@@ -1,0 +1,16 @@
+<div *ngIf="toggle" class="overlay">
+    <div (click)="toggle = !toggle" id="backdrop"></div>
+    <div class="modal">
+        <div class="modal_title">
+            <h1>{{ title }}</h1>
+            <img (click)="toggle = !toggle" src="./../../../../assets/svg/cross-modal.svg" />
+        </div>
+
+        <span>{{ msg }}</span>
+        <div class="action-button">
+            <button class="btn-secondary" (click)="cancel()">ANNULER</button>
+            <button class="btn-danger" (click)="confirm()">OK</button>
+        </div>
+
+    </div>
+</div>

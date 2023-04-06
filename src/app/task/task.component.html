@@ -1,6 +1,9 @@
 <h1>Todo list</h1>
-<div (click)="showModalCreateTask()" class="button-add-concession">
-    <button class="btn-primary">Ajouter une concession <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+<div (click)="toggleAlert = !toggleAlert" id="backdrop"></div>
+<app-confirm [title]="'Supprimer la tache'" [msg]="'Voulez-vous supprimer cette tache ?'" [toggle]="toggleAlert"
+    (callback)="responseAlert($event)"></app-confirm>
+<div (click)="showModalCreateTask()" class="button-add-task">
+    <button class="btn-primary">Create an task<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
             preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20">
             <path fill="currentColor" fill-rule="evenodd"
                 d="M10 18a8 8 0 1 0 0-16a8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z"
@@ -14,7 +17,7 @@
     <div class="modal">
         <div class="modal-top">
             <h3>{{createTask === true ? 'Create task ' : 'Modify task'}}</h3>
-            <img (click)="toggleModal = !toggleModal" src="./../../../../assets/svg/cross-modal.svg" />
+            <img (click)="toggleModal = !toggleModal" src="./../../../../assets/svg/close-rounded.svg" />
 
         </div>
 
@@ -31,10 +34,10 @@
                 </div>
 
                 <div class="input_row_left">
-                    <label>Addresse deux</label>
+                    <label>Description</label>
                     <input
-                        [class.input-error]="taskForm.get('description')?.touched && taskForm.get('address_two')?.invalid"
-                        type="text" formControlName="address_two">
+                        [class.input-error]="taskForm.get('description')?.touched && taskForm.get('description')?.invalid"
+                        type="text" formControlName="description">
                     <span *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid"
                         class="error">Ce
                         champs est requis !</span>
@@ -53,6 +56,8 @@
 <table class="isNotTable">
     <thead>
         <tr class="titre">
+            <th>Name</th>
+            <th>Description</th>
 
             <th>Actions</th>
 

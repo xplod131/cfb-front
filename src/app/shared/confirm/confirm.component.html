@@ -1,0 +1,11 @@
+<section *ngIf="toggle" class="overlay">
+    <div id="backdrop" (click)="confirm(false)"></div>
+    <div class="modal">
+        <h1>{{ title }}</h1>
+        <span>{{ msg }}</span>
+        <div class="modal_btn--row">
+            <button class="btn-secondary" (click)="confirm(false)">Annuler</button>
+            <button class="btn-danger" (click)="confirm(true)">Confirmer</button>
+        </div>
+    </div>
+</section>

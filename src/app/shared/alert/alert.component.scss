@@ -1,0 +1,34 @@
+@import './../../../assets/utils/layout';
+
+.overlay {
+    @include Flex(center, center);
+}
+
+.modal {
+    @include Flex(space-around, center, column);
+    width: 35em;
+    height: 13em;
+
+    .modal_title {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h1 {
+        @include Title(2.25em, #565a90);
+        margin: 0;
+    }
+
+    span {
+        width: 80%;
+        text-align: center;
+        @include Text(1em, 300, #595ff1);
+        padding-bottom: 10px;
+    }
+
+    .action-button {
+        display: flex;
+        width: 60%;
+        justify-content: space-around;
+    }
+}

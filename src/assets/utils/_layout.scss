@@ -1,0 +1,131 @@
+@import './mixin';
+@import './variables';
+
+.container-wide {
+    position: relative;
+    padding: 1.25em;
+    background: #fff;
+    top: 54px;
+    left: 0;
+    min-height: calc(100vh - 54px);
+    max-width: 100%;
+    padding-bottom: 60px;
+
+    @media screen and (min-width: 1280px) {
+        max-width: calc(100% - 70px);
+        left: 60px;
+        border-radius: 10px;
+        top: 64px;
+        min-height: calc(100vh - 74px);
+    }
+}
+
+.container-with-aside {
+    position: relative;
+    padding: 1.25em;
+    background: #fff;
+    top: 54px;
+    left: 0;
+    min-height: calc(100vh - 54px);
+    max-width: 100%;
+
+    @media screen and (max-width: 768px) {
+        width: calc(100% - 10px);
+        padding: 10px;
+        border-radius: 0;
+        overflow: scroll;
+        height: 100vh;
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1366px) {
+        width: 50%;
+        height: auto;
+        padding: 20px;
+        border-radius: 10px;
+    }
+}
+
+.btn-primary {
+    all: unset;
+    border: 1px solid $call-to-action;
+    border-radius: 0.25em;
+    padding: 0.5em 1em;
+    @include Text(1em, 500, #fff);
+    background: $call-to-action;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+        background: #fff;
+        color: $call-to-action;
+        transition: all 0.15s ease-in-out;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        filter: grayscale(80%);
+    }
+}
+
+.btn-secondary {
+    all: unset;
+    border: 1px solid $call-to-action;
+    border-radius: 0.25em;
+    padding: 0.5em 1em;
+    @include Text(1em, 500, $call-to-action);
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+        background: $call-to-action;
+        color: #fff;
+        transition: all 0.15s ease-in-out;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        filter: grayscale(80%);
+    }
+}
+
+.btn-danger {
+    all: unset;
+    border: 1px solid red;
+    border-radius: 0.25em;
+    padding: 0.5em 1em;
+    @include Text(1em, 500, red);
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+        background: red;
+        color: #fff;
+        transition: all 0.15s ease-in-out;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        filter: grayscale(80%);
+    }
+}
+
+.modal {
+    background: #fff;
+    padding: 0.5em 2em;
+    border-radius: 1em;
+    min-width: 300px;
+    gap: 0.5em;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+}
