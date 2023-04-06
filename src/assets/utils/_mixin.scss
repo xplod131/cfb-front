@@ -1,0 +1,23 @@
+@mixin container-lg-modal() {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 40000;
+    top: 0;
+    @include Flex(center, center, column);
+    background-color: #9e9e9e60;
+    backdrop-filter: blur(15px);
+
+    @media screen and (max-width: 768px) {
+        top: 0;
+    }
+
+    #backdrop {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1000;
+        top: 0;
+        background-color: transparent;
+    }
+}
