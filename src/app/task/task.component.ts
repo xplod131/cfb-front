@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ITask } from '../models/task.model';
+import { TodoService } from '../../../generated-sources/openapi/api/todo.service';
+import { Observable, map, tap } from 'rxjs';
+import { TodoJsonld } from '../../../generated-sources/openapi/model/todoJsonld';
 
 @Component({
   selector: 'app-task',
@@ -13,38 +16,27 @@ export class TaskComponent implements OnInit {
   createTask: boolean = false;
   taskForm!: UntypedFormGroup;
 
-  task!: ITask;
+  task!: TodoJsonld;
 
-  tasksList: ITask[] = [
-    {
-      id: 1,
-      name: 'First task',
-      description: 'nik zebi'
-    },
-    {
-      id: 2,
-      name: 'seconde task',
-      description: 'nik zebi'
-    }
-  ];
-  idCurrentClickedTask!: number | undefined;
+  tasksList$!: Observable<TodoJsonld[]>;
+  idCurrentClickedTask!: string;
 
   toggleAlert!: boolean;
 
   constructor(
     private fb: UntypedFormBuilder,
+    private todoService: TodoService,
   ) { }
 
   ngOnInit(): void {
-
     this.initForm();
+    this.loadTasks();
   }
 
   initForm(): void {
     this.taskForm = this.fb.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
-
     },
       {
         updateOn: 'blur'
@@ -65,7 +57,7 @@ export class TaskComponent implements OnInit {
     this.createTask = true;
   }
 
-  showModalUpdateTask(task: ITask) {
+  showModalUpdateTask(task: TodoJsonld) {
     console.log(this.taskForm)
     this.toggleModal == false
       ? this.toggleModal = true
@@ -85,9 +77,20 @@ export class TaskComponent implements OnInit {
     if (event) {
       // make delete task request 
 
-
+      this.todoService.apiTodosIdDelete({ id: this.idCurrentClickedTask })
     }
     this.toggleAlert = false;
   }
+
+  async loadTasks() {
+    this.tasksList$ = this.todoService.apiTodosGetCollection({}).pipe(
+      map(response => response.hydramember),
+    )
+
+  }
+
+
+
+
 
 }

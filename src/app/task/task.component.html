@@ -63,15 +63,14 @@
 
         </tr>
     </thead>
-    <tbody *ngFor="let task of tasksList">
+    <tbody *ngFor="let task of tasksList$ | async">
         <tr align="center">
             <td>{{task.name}}</td>
 
             <td>{{task.description}}</td>
 
             <td class="td_button"><button class="btn-primary" (click)="showModalUpdateTask(task)">Modifier</button>
-                <button class="btn-danger"
-                    (click)="toggleAlert = !toggleAlert; idCurrentClickedTask = task.id">Supprimer</button>
+                <button class="btn-danger" (click)="toggleAlert = !toggleAlert; ">Supprimer</button>
             </td>
         </tr>
     </tbody>
