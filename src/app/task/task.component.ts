@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ITask } from '../models/task.model';
 
 @Component({
@@ -11,7 +11,7 @@ export class TaskComponent implements OnInit {
 
   toggleModal: boolean = false;
   createTask: boolean = false;
-  taskForm!: FormGroup;
+  taskForm!: UntypedFormGroup;
 
   task!: ITask;
 
@@ -32,7 +32,7 @@ export class TaskComponent implements OnInit {
   toggleAlert!: boolean;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) { }
 
   ngOnInit(): void {
