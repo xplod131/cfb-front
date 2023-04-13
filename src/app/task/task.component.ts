@@ -75,9 +75,7 @@ export class TaskComponent implements OnInit {
 
     this.createTask = true;
   }
-
   showModalUpdateTask(task: TodoJsonld) {
-
     this.toggleModal == false
       ? this.toggleModal = true
       : this.toggleModal = false;
@@ -90,25 +88,14 @@ export class TaskComponent implements OnInit {
     )
     this.task = task;
   }
-
-
   responseAlert(event: any) {
     if (event) {
       this.todoService.apiTodosIdDelete({ id: this.idCurrentClickedTask.toString() }).subscribe()
+      window.location.reload();
     }
     this.toggleAlert = false;
-    window.location.reload();
   }
-
   async loadTasks() {
     this.tasksList = await this.todoService.apiTodosGetCollection({}).toPromise();
   }
-
-
 }
-
-
-
-
-
-
