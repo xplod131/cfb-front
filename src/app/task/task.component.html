@@ -22,9 +22,9 @@
         </div>
 
         <form (ngSubmit)="onSubmit(createTask)" [formGroup]="taskForm" *ngIf="taskForm" class="container-form">
-            <div class="input_column_left">
+            <div>
 
-                <div class="input_row_left">
+                <div>
                     <label>Nom *</label>
 
                     <input [class.input-error]="taskForm.get('name')?.touched && taskForm.get('name')?.invalid"
@@ -33,7 +33,7 @@
                         invalide</span>
                 </div>
 
-                <div class="input_row_left">
+                <div>
                     <label>Description</label>
                     <input
                         [class.input-error]="taskForm.get('description')?.touched && taskForm.get('description')?.invalid"
@@ -42,6 +42,13 @@
                         class="error">Ce
                         champs est requis !</span>
                 </div>
+                <section class="confirm">
+                    <div class="required-fields">
+                        <p>* Champs obligatoires</p>
+                    </div>
+                    <input type="submit" value="Valider"
+                        [ngClass]="taskForm.invalid ? 'unvalidate-form' : 'validate-form'">
+                </section>
 
 
                 <!-- <div class="required-fields">
@@ -63,14 +70,15 @@
 
         </tr>
     </thead>
-    <tbody *ngFor="let task of tasksList$ | async">
+    <tbody *ngFor="let task of tasksList['hydra:member']  ">
         <tr align="center">
             <td>{{task.name}}</td>
 
             <td>{{task.description}}</td>
 
             <td class="td_button"><button class="btn-primary" (click)="showModalUpdateTask(task)">Modifier</button>
-                <button class="btn-danger" (click)="toggleAlert = !toggleAlert; ">Supprimer</button>
+                <button class="btn-danger"
+                    (click)="toggleAlert = !toggleAlert; idCurrentClickedTask = task.id">Supprimer</button>
             </td>
         </tr>
     </tbody>

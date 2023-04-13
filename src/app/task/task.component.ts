@@ -4,6 +4,7 @@ import { ITask } from '../models/task.model';
 import { TodoService } from '../../../generated-sources/openapi/api/todo.service';
 import { Observable, map, tap } from 'rxjs';
 import { TodoJsonld } from '../../../generated-sources/openapi/model/todoJsonld';
+import { ApiTodosGetCollection200Response } from '../../../generated-sources/openapi';
 
 @Component({
   selector: 'app-task',
@@ -18,8 +19,8 @@ export class TaskComponent implements OnInit {
 
   task!: TodoJsonld;
 
-  tasksList$!: Observable<TodoJsonld[]>;
-  idCurrentClickedTask!: string;
+  tasksList!: any;
+  idCurrentClickedTask!: number;
 
   toggleAlert!: boolean;
 
@@ -44,10 +45,28 @@ export class TaskComponent implements OnInit {
   }
 
   onSubmit(createTask: boolean): void {
-    // make create task request
+    const todo = {
+      name: this.taskForm.value.name,
+      description: this.taskForm.value.description
+    }
+    if (createTask) {
 
+      this.todoService.apiTodosPost({
+        todoJsonld: todo
+
+      }).subscribe();
+      window.location.reload();
+    } else {
+      if (this.task.id)
+        this.idCurrentClickedTask = this.task.id
+      this.todoService.apiTodosIdPut({
+        id: this.idCurrentClickedTask.toString(),
+        todoJsonld: todo
+      }).subscribe()
+      window.location.reload();
+    }
+    this.toggleModal = false
   }
-
   showModalCreateTask() {
     this.taskForm.reset();
     this.toggleModal == false
@@ -58,7 +77,7 @@ export class TaskComponent implements OnInit {
   }
 
   showModalUpdateTask(task: TodoJsonld) {
-    console.log(this.taskForm)
+
     this.toggleModal == false
       ? this.toggleModal = true
       : this.toggleModal = false;
@@ -75,22 +94,21 @@ export class TaskComponent implements OnInit {
 
   responseAlert(event: any) {
     if (event) {
-      // make delete task request 
-
-      this.todoService.apiTodosIdDelete({ id: this.idCurrentClickedTask })
+      this.todoService.apiTodosIdDelete({ id: this.idCurrentClickedTask.toString() }).subscribe()
     }
     this.toggleAlert = false;
+    window.location.reload();
   }
 
   async loadTasks() {
-    this.tasksList$ = this.todoService.apiTodosGetCollection({}).pipe(
-      map(response => response.hydramember),
-    )
-
+    this.tasksList = await this.todoService.apiTodosGetCollection({}).toPromise();
   }
 
 
-
-
-
 }
+
+
+
+
+
+

@@ -301,3 +301,43 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
+.confirm {
+    width: 100%;
+    @include Flex($align: center, $direction: row, $justify: space-between);
+
+    .validate-form {
+        background-color: $call-to-action;
+        transition: all 0.30s ease-in-out;
+    }
+
+    .unvalidate-form {
+        background-color: $title-color;
+        transition: all 0.30s ease-in-out;
+    }
+
+    input[type="submit"] {
+        //  background-color: $call-to-action;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        // width: 20%;
+        height: 2em;
+        margin-left: 20px;
+        font-size: 1em;
+
+
+    }
+
+    input[type="submit"]:hover {
+        cursor: pointer;
+    }
+
+    .required-fields {
+        height: auto;
+
+        p {
+            color: $call-to-action;
+        }
+    }
+}
