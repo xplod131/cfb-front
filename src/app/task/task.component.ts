@@ -4,7 +4,6 @@ import { ITask } from '../models/task.model';
 import { TodoService } from '../../../generated-sources/openapi/api/todo.service';
 import { Observable, map, tap } from 'rxjs';
 import { TodoJsonld } from '../../../generated-sources/openapi/model/todoJsonld';
-import { ApiTodosGetCollection200Response } from '../../../generated-sources/openapi';
 
 @Component({
   selector: 'app-task',
@@ -64,6 +63,7 @@ export class TaskComponent implements OnInit {
         todoJsonld: todo
       }).subscribe()
       window.location.reload();
+      this.loadTasks();
     }
     this.toggleModal = false
   }
@@ -90,7 +90,9 @@ export class TaskComponent implements OnInit {
   }
   responseAlert(event: any) {
     if (event) {
+      console.log("delete event")
       this.todoService.apiTodosIdDelete({ id: this.idCurrentClickedTask.toString() }).subscribe()
+      this.loadTasks();
       window.location.reload();
     }
     this.toggleAlert = false;
